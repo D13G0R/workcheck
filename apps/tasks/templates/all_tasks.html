@@ -1,0 +1,87 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}Tareas{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/all_tasks.css' %}">
+{% endblock %}
+
+{% block content %}
+<main class="tasks-page">
+
+    <div class="top-bar">
+        <h2>Tareas</h2>
+        <a href="{% url 'list_categories ' %}" class="btn-nav">Gestión de categorías →</a>
+    </div>
+
+    <div class="tasks-layout">
+
+        <section class="panel">
+            <p class="panel-title">Todas las tareas</p>
+
+            {% if tasks %}
+                <ul class="tasks-list">
+                    {% for task in tasks %}
+                        <li class="task-item">
+                            <h3>{{ task.title }}</h3>
+                            <p>{{ task.description|default:"Sin descripción" }}</p>
+                            <div class="task-item-footer">
+                                <span class="priority-badge priority-{{ task.value }}">
+                                    Prioridad {{ task.value }}
+                                </span>
+                                <div class="task-actions">
+                                    <a href="{% url 'update_task' task.id %}" class="btn-task">Editar</a>
+                                    <a href="{% url 'delete_task' task.id %}" class="btn-task btn-task-delete">Eliminar</a>
+                                </div>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p class="empty-state">Aún no hay tareas. Crea la primera con el formulario.</p>
+            {% endif %}
+        </section>
+
+        <section class="panel">
+            <p class="panel-title">Nueva tarea</p>
+
+            <form method="post" class="task-form">
+                {% csrf_token %}
+
+                <div class="field-block">
+                    <label for="id_value">Prioridad</label>
+                    <select id="id_value" name="value" required>
+                        <option value="1" data-color="#ff8a80">1 (Más alta)</option>
+                        <option value="2" data-color="#ffb74d">2</option>
+                        <option value="3" data-color="#fff176">3</option>
+                        <option value="4" data-color="#c5e1a5">4</option>
+                        <option value="5" data-color="#81c784" selected>5 (Más baja)</option>
+                    </select>
+                </div>
+
+                <div class="field-block">
+                    <label for="title">Título</label>
+                    <input type="text" id="title" name="title" placeholder="Ej: Terminar informe mensual" required>
+                </div>
+
+                <div class="field-block">
+                    <label for="description">Descripción</label>
+                    <textarea id="description" name="description" placeholder="Describe brevemente la tarea..."></textarea>
+                </div>
+
+                <div class="field-block">
+                    <label for="reminder_datetime">Recordatorio</label>
+                    <input type="datetime-local" id="reminder_datetime" name="reminder_datetime">
+                </div>
+
+                <button type="submit" class="submit-btn">Agregar tarea</button>
+            </form>
+        </section>
+
+    </div>
+
+</main>
+
+<script src="{% static 'tasks/js/all_tasks.js' %}"></script>
+{% endblock %}

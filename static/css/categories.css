@@ -1,0 +1,285 @@
+:root {
+    --bg-main: #fff8dc;
+    --bg-glow-a: #ffeaa4;
+    --bg-glow-b: #ffd67d;
+    --card-main: #fffdf3;
+    --text-main: #4e4528;
+    --text-soft: #7c6f42;
+    --border-soft: #ebd48d;
+    --shadow-soft: 0 16px 34px rgba(122, 94, 23, 0.18);
+}
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--text-main);
+    background:
+        radial-gradient(circle at 10% 10%, var(--bg-glow-a) 0, transparent 30%),
+        radial-gradient(circle at 90% 0%, var(--bg-glow-b) 0, transparent 24%),
+        linear-gradient(145deg, #fffbe8 0%, #ffeeb8 100%);
+    padding: 28px;
+}
+
+/* ── Page layout ─────────────────────────── */
+.categories-hub {
+    max-width: 1080px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* ── Top bar ──────────────────────────────── */
+.top-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.top-bar-left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.top-bar-left h2 {
+    margin: 0;
+    font-size: 1.25rem;
+}
+
+.spark {
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    background: #ffe08b;
+    display: grid; place-items: center;
+    font-size: 0.8rem; color: #6c4f00;
+    border: 1px solid #e8c45f;
+    flex-shrink: 0;
+}
+
+/* ── Crear button ─────────────────────────── */
+.btn-crear {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #f7d774;
+    color: #5d4800;
+    border: none;
+    border-radius: 999px;
+    padding: 10px 20px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+    box-shadow: 0 6px 16px rgba(247, 215, 116, 0.5);
+    transition: transform 0.16s, filter 0.16s;
+}
+
+.btn-crear:hover {
+    transform: translateY(-1px);
+    filter: brightness(1.04);
+}
+
+/* ── Bubble field ─────────────────────────── */
+.bubble-field {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: flex-start;
+}
+
+/* ── Individual bubble ────────────────────── */
+.bubble {
+    border-radius: 20px;
+    padding: 16px;
+    min-width: 170px;
+    max-width: 230px;
+    flex: 1 1 170px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: color-mix(in srgb, var(--category-color, #f7d774) 80%, white 20%);
+    border: 1.5px solid var(--category-color, #f7d774);
+    box-shadow:
+        0 8px 24px color-mix(in srgb, var(--category-color, #e0b840) 40%, transparent 60%),
+        0 2px 6px rgba(0, 0, 0, 0.07);
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.bubble:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow:
+        0 16px 36px color-mix(in srgb, var(--category-color, #e0b840) 50%, transparent 50%),
+        0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Gloss circle decorativo */
+.bubble::before {
+    content: "";
+    position: absolute;
+    top: -30px; right: -30px;
+    width: 90px; height: 90px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.25);
+    pointer-events: none;
+}
+
+.bubble-top {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.bubble-dot {
+    width: 11px; height: 11px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.22);
+    border: 2px solid rgba(255, 255, 255, 0.6);
+    flex-shrink: 0;
+}
+
+.bubble-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: rgba(0, 0, 0, 0.72);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.bubble-hex {
+    font-size: 0.78rem;
+    font-family: monospace;
+    color: rgba(0, 0, 0, 0.45);
+}
+
+/* ── Card actions ─────────────────────────── */
+.card-actions {
+    display: flex;
+    gap: 7px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    border: none;
+    border-radius: 999px;
+    padding: 6px 14px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.55);
+    color: rgba(0, 0, 0, 0.65);
+    transition: background 0.15s, transform 0.12s;
+}
+
+.btn:hover {
+    background: rgba(255, 255, 255, 0.8);
+    transform: translateY(-1px);
+}
+
+.btn-delete {
+    background: rgba(255, 100, 80, 0.18);
+    color: rgba(130, 30, 20, 0.85);
+}
+
+.btn-delete:hover { background: rgba(255, 100, 80, 0.3); }
+
+/* ── Empty state ──────────────────────────── */
+.empty-state {
+    background: #fff6d2;
+    border: 1px dashed #e6ca72;
+    border-radius: 14px;
+    padding: 20px;
+    color: #725c1a;
+    text-align: center;
+}
+
+/* ── Responsive ───────────────────────────── */
+@media (max-width: 560px) {
+    body { padding: 16px; }
+    .bubble { min-width: 140px; }
+}
+
+
+/* ── Form card ────────────────────────────── */
+.form-card {
+    background: var(--card-main);
+    border: 1px solid var(--border-soft);
+    border-radius: 22px;
+    padding: 24px;
+    box-shadow: var(--shadow-soft);
+    max-width: 480px;
+}
+
+.form-subtitle {
+    margin: 0 0 20px;
+    color: var(--text-soft);
+    font-size: 0.9rem;
+}
+
+.category-form {
+    display: grid;
+    gap: 16px;
+}
+
+.field-group {
+    display: grid;
+    gap: 6px;
+}
+
+.field-group label {
+    font-weight: 700;
+    font-size: 0.92rem;
+    color: var(--text-main);
+}
+
+.field-group input,
+.field-group select {
+    width: 100%;
+    border: 1px solid var(--border-soft);
+    border-radius: 12px;
+    padding: 10px 12px;
+    background: #fffef9;
+    color: var(--text-main);
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.field-group input:focus,
+.field-group select:focus {
+    border-color: #edc24e;
+    box-shadow: 0 0 0 3px rgba(255, 214, 125, 0.45);
+}
+
+.action-row {
+    display: flex;
+    gap: 10px;
+    margin-top: 4px;
+}
+
+.btn-add {
+    background: #f7d774;
+    color: #5d4800;
+    box-shadow: 0 6px 14px rgba(247, 215, 116, 0.45);
+}
+
+.btn-clear {
+    background: #f4edcf;
+    color: #6b5a22;
+    border: 1px solid #eadca4;
+}
+
+/* ── Delete card tinted ───────────────────── */
+.delete-card {
+    background: color-mix(in srgb, var(--category-color, #f7d774) 15%, white 85%);
+    border-color: color-mix(in srgb, var(--category-color, #f7d774) 60%, transparent 40%);
+}

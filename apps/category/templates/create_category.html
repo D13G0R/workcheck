@@ -1,0 +1,47 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}Crear categoría{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/categories.css' %}">
+{% endblock %}
+
+{% block content %}
+<main class="categories-hub">
+
+    <div class="top-bar">
+        <div class="top-bar-left">
+            <span class="spark">●</span>
+            <h2>Nueva categoría</h2>
+        </div>
+        <a href="{% url 'list_categories' %}" class="btn-crear">← Volver</a>
+    </div>
+
+    <section class="form-card">
+        <p class="form-subtitle">Ponle nombre y color a tu categoría.</p>
+
+        <form method="POST" class="category-form">
+            {% csrf_token %}
+
+            <div class="field-group">
+                {{ form.title.label_tag }}
+                {{ form.title }}
+                {{ form.title.errors }}
+            </div>
+
+            <div class="field-group">
+                {{ form.color.label_tag }}
+                {{ form.color }}
+                {{ form.color.errors }}
+            </div>
+
+            <div class="action-row">
+                <button type="submit" class="btn btn-add">Crear</button>
+                <button type="reset" class="btn btn-clear">Limpiar</button>
+            </div>
+        </form>
+    </section>
+
+</main>
+{% endblock %}

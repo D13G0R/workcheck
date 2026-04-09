@@ -1,0 +1,51 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}Categorías{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/categories.css' %}">
+{% endblock %}
+
+{% block content %}
+<main class="categories-hub">
+    <div class="top-bar">
+    <div class="top-bar-left">
+        <span class="spark">●</span>
+        <h2>Tus categorías</h2>
+    </div>
+    <div style="display: flex; gap: 10px;">
+        <a href="{% url 'list_tasks' %}" class="btn-crear">< Ver tareas</a>
+        <a href="{% url 'create_category' %}" class="btn-crear">+ Crear categoría</a>
+    </div>
+</div>
+
+    {% if categories %}
+        <div class="bubble-field">
+            {% for category in categories %}
+                <article
+                    class="bubble"
+                    style="--category-color: {{ category.color|default:'#F7D774' }};"
+                >
+                    <div class="bubble-top">
+                        <span class="bubble-dot"></span>
+                        <span class="bubble-title">{{ category.title }}</span>
+                    </div>
+
+                    <div class="bubble-hex">{{ category.color }}</div>
+
+                    <div class="card-actions">
+                        <a href="{% url 'update_category' category.id %}" class="btn">Editar</a>
+                        <a href="{% url 'delete_category' category.id %}" class="btn btn-delete">Eliminar</a>
+                    </div>
+                </article>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="empty-state">
+            <p>No hay categorías todavía. Crea la primera con el botón de arriba.</p>
+        </div>
+    {% endif %}
+
+</main>
+{% endblock %}

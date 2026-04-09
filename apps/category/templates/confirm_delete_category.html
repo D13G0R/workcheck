@@ -1,0 +1,44 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}Eliminar categoría{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/categories.css' %}">
+{% endblock %}
+
+{% block content %}
+<main class="categories-hub">
+
+    <div class="top-bar">
+        <div class="top-bar-left">
+            <span class="spark">●</span>
+            <h2>Eliminar categoría</h2>
+        </div>
+        <a href="{% url 'list_categories' %}" class="btn-crear">← Volver</a>
+    </div>
+
+    <section
+        class="form-card delete-card"
+        style="--category-color: {{ category.color|default:'#F7D774' }};"
+    >
+        <div class="bubble-top" style="margin-bottom: 10px;">
+            <span class="bubble-dot"></span>
+            <span class="bubble-title">{{ category.title }}</span>
+        </div>
+
+        <p class="form-subtitle">
+            ¿Seguro que quieres eliminar esta categoría? Esta acción no se puede deshacer.
+        </p>
+
+        <form method="POST">
+            {% csrf_token %}
+            <div class="action-row">
+                <button type="submit" class="btn btn-delete">Sí, eliminar</button>
+                <a href="{% url 'list_categories' %}" class="btn btn-clear">Cancelar</a>
+            </div>
+        </form>
+    </section>
+
+</main>
+{% endblock %}

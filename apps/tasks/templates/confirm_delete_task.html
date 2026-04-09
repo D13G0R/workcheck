@@ -1,0 +1,44 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}Eliminar Tarea{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/all_tasks.css' %}">
+{% endblock %}
+
+{% block content %}
+<main class="tasks-page form-page">
+
+    <div class="top-bar">
+        <h2>Confirmar eliminación</h2>
+        <a href="{% url 'list_tasks' %}" class="btn-nav">← Volver</a>
+    </div>
+
+    <section class="panel">
+        <p class="panel-title">¿Estás seguro?</p>
+        
+        <div class="delete-content">
+            <p>Estás a punto de eliminar la tarea:</p>
+            <div class="task-item" style="margin-bottom: 20px; background: rgba(0,0,0,0.05);">
+                <h3>{{ task.title }}</h3>
+                <p>{{ task.description|default:"Sin descripción" }}</p>
+            </div>
+            
+            <form method="post" class="task-form">
+                {% csrf_token %}
+                
+                <!-- Reutilizamos submit-btn con una clase extra para el color rojo -->
+                <button type="submit" class="submit-btn btn-confirm-red">
+                    Sí, eliminar definitivamente
+                </button>
+                
+                <a href="{% url 'list_tasks' %}" class="btn-cancel-link">
+                    Cancelar y volver
+                </a>
+            </form>
+        </div>
+    </section>
+
+</main>
+{% endblock %}

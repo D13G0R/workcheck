@@ -1,0 +1,47 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}Actualizar categoría{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/categories.css' %}">
+{% endblock %}
+
+{% block content %}
+<main class="categories-hub">
+
+    <div class="top-bar">
+        <div class="top-bar-left">
+            <span class="spark">●</span>
+            <h2>Editar categoría</h2>
+        </div>
+        <a href="{% url 'list_categories' %}" class="btn-crear">← Volver</a>
+    </div>
+
+    <section class="form-card">
+        <p class="form-subtitle">Modifica el nombre o el color de tu categoría.</p>
+
+        <form method="POST" class="category-form">
+            {% csrf_token %}
+
+            <div class="field-group">
+                {{ form.title.label_tag }}
+                {{ form.title }}
+                {{ form.title.errors }}
+            </div>
+
+            <div class="field-group">
+                {{ form.color.label_tag }}
+                {{ form.color }}
+                {{ form.color.errors }}
+            </div>
+
+            <div class="action-row">
+                <button type="submit" class="btn btn-add">Guardar</button>
+                <a href="{% url 'list_categories' %}" class="btn btn-clear">Cancelar</a>
+            </div>
+        </form>
+    </section>
+
+</main>
+{% endblock %}
