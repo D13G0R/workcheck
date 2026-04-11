@@ -1,1 +1,1 @@
-web: gunicorn workcheck.wsgi
+web:python manage.py migrate && gunicorn workcheck.wsgi
