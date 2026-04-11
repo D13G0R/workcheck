@@ -30,7 +30,7 @@ DEBUG = True
 ALLOWED_HOSTS = ['localhost','workcheck-production.up.railway.app']
 
 CSRF_TRUSTED_ORIGINS = [
-    "https://workcheck-production.up.railway.app/"
+    "https://workcheck-production.up.railway.app"
 ]
 
 # Application definition
