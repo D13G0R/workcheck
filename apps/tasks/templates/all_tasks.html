@@ -12,7 +12,7 @@
 
     <div class="top-bar">
         <h2>Tareas</h2>
-        <a href="{% url 'list_categories ' %}" class="btn-nav">Gestión de categorías →</a>
+        <a href="{% url 'list_categories' %}" class="btn-nav">Gestión de categorías →</a>
     </div>
 
     <div class="tasks-layout">
@@ -21,25 +21,28 @@
             <p class="panel-title">Todas las tareas</p>
 
             {% if tasks %}
-                <ul class="tasks-list">
-                    {% for task in tasks %}
-                        <li class="task-item">
-                            <h3>{{ task.title }}</h3>
-                            <p>{{ task.description|default:"Sin descripción" }}</p>
-                            <div class="task-item-footer">
-                                <span class="priority-badge priority-{{ task.value }}">
-                                    Prioridad {{ task.value }}
-                                </span>
-                                <div class="task-actions">
-                                    <a href="{% url 'update_task' task.id %}" class="btn-task">Editar</a>
-                                    <a href="{% url 'delete_task' task.id %}" class="btn-task btn-task-delete">Eliminar</a>
-                                </div>
-                            </div>
-                        </li>
-                    {% endfor %}
-                </ul>
+            <ul class="tasks-list">
+                {% for task in tasks %}
+                <li class="task-item">
+                    <h3>{{ task.title }}</h3>
+                    <p>{{ task.description|default:"Sin descripción" }}</p>
+                    <div class="task-item-footer">
+                        <span class="priority-badge priority-{{ task.value }}">
+                            Prioridad {{ task.value }}
+                        </span>
+                        <span class="priority-badge priority-{{ task.value }}">
+                            Categoria {{ task.category.title }}
+                        </span>
+                        <div class="task-actions">
+                            <a href="{% url 'update_task' task.id %}" class="btn-task">Editar</a>
+                            <a href="{% url 'delete_task' task.id %}" class="btn-task btn-task-delete">Eliminar</a>
+                        </div>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
             {% else %}
-                <p class="empty-state">Aún no hay tareas. Crea la primera con el formulario.</p>
+            <p class="empty-state">Aún no hay tareas. Crea la primera con el formulario.</p>
             {% endif %}
         </section>
 
@@ -67,13 +70,31 @@
 
                 <div class="field-block">
                     <label for="description">Descripción</label>
-                    <textarea id="description" name="description" placeholder="Describe brevemente la tarea..."></textarea>
+                    <textarea id="description" name="description"
+                        placeholder="Describe brevemente la tarea..."></textarea>
                 </div>
 
                 <div class="field-block">
+                    <label for="id_category">Chose one category</label>
+                    <select name="category" id="id_category">
+                        {% for category in categories %}
+                        <option value="{{ category.id }}"
+
+                        {% if form.instance.category and category.id == form.instance.category.id %}
+                            selected 
+                        {% endif %}>
+                        {{category.title}}
+                        </option>
+
+                        {% endfor %}
+                    </select>
+                    
+                </div>
+
+                <!-- <div class="field-block">
                     <label for="reminder_datetime">Recordatorio</label>
                     <input type="datetime-local" id="reminder_datetime" name="reminder_datetime">
-                </div>
+                </div> -->
 
                 <button type="submit" class="submit-btn">Agregar tarea</button>
             </form>

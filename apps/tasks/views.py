@@ -14,6 +14,11 @@ class list_tasks(ListView):
     model = Task
     template_name = "all_tasks.html"
     context_object_name = "tasks"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["categories"] = Category.objects.all()
+        return context
     
     def post (self, request, *args, **kwargs):
 
@@ -27,7 +32,7 @@ class list_tasks(ListView):
             value = value
         )
 
-        return redirect("tasks")
+        return redirect("list_tasks")
 
 def delete_task(request, id):
     task = get_object_or_404(Task, id = id)
