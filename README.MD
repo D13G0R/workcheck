@@ -1,151 +1,250 @@
-📌 Sistema de Gestión Colaborativa de Tareas (SGCT)
-🧠 Descripción
+Te lo voy a mejorar, pero no solo “bonito”: más claro, profesional y con estructura real de proyecto (lo que se espera en GitHub en equipos serios).
 
-SGCT es una aplicación web orientada a la gestión de tareas en entornos colaborativos. Permite a múltiples usuarios organizar su trabajo mediante grupos, donde pueden crear, asignar y dar seguimiento a tareas, manteniendo control de acceso basado en roles.
+---
 
-El sistema está diseñado bajo una arquitectura cliente-servidor, separando completamente el frontend y el backend.
+# 📌 Sistema de Gestión Colaborativa de Tareas (SGCT)
 
-🎯 Objetivo
+## 🧠 Descripción
 
-Facilitar la organización y colaboración entre usuarios mediante:
+SGCT es una aplicación web diseñada para la gestión de tareas en entornos colaborativos. Permite a múltiples usuarios organizar su trabajo dentro de grupos, facilitando la asignación de tareas, el seguimiento de progreso y la comunicación entre miembros.
 
-Creación de grupos de trabajo
-Gestión de miembros mediante invitaciones
-Administración de tareas
-Organización por categorías
-Asignación de responsabilidades
+El sistema sigue una arquitectura cliente-servidor desacoplada, donde el frontend y el backend operan de forma independiente a través de una API REST.
 
-🏗️ Tecnologías utilizadas
-Backend
-Django REST Framework
-PostgreSQL
-Frontend
-React
+---
 
-📦 Dependencias principales
-Backend
-Django
-Django REST Framework
-PostgreSQL
-Gunicorn
-Whitenoise
+## 🎯 Objetivo
 
-⚙️ Funcionalidades principales
-Registro e inicio de sesión de usuarios
-Creación y gestión de grupos
-Invitación de usuarios por correo electrónico
-Sistema de roles (administrador / miembro)
-Creación, edición y eliminación de tareas
-Asignación de tareas a usuarios
-Organización de tareas por categorías
-Comentarios en tareas
-Registro de actividad dentro del sistema
+Centralizar la organización del trabajo en equipo mediante:
 
-🔐 Control de acceso
+* Creación de grupos de trabajo
+* Gestión de miembros mediante invitaciones
+* Administración de tareas
+* Organización por categorías
+* Asignación de responsabilidades
+* Seguimiento de actividad
 
-El sistema implementa restricciones basadas en:
+---
 
-Pertenencia
+## 🏗️ Stack Tecnológico
 
-Un usuario solo puede acceder a los grupos a los que pertenece.
+### 🔙 Backend
 
-Roles
-Administrador:
-Invitar usuarios
-Gestionar miembros
-Administrar el grupo
-Miembro:
-Crear y gestionar tareas
-Comentar
-🔗 Modelo de datos (visión general)
+* Django
+* Django REST Framework
+* PostgreSQL
+* Gunicorn
+* Whitenoise
 
-El sistema está basado en un modelo relacional que incluye:
+### 🎨 Frontend
 
-Usuarios
-Grupos
-Relación Usuario-Grupo (muchos a muchos con roles)
-Tareas
-Categorías
-Invitaciones
-Comentarios
-Registro de actividad
+* React
 
-🔄 Flujos principales
-1. Registro
+---
 
-El usuario crea una cuenta en el sistema.
+## 📦 Dependencias principales
 
-2. Creación de grupo
+### Backend
 
-Un usuario crea un grupo y se asigna como administrador.
+```txt
+asgiref==3.11.1
+dj-database-url==3.1.2
+Django==6.0.3
+gunicorn==25.3.0
+packaging==26.0
+psycopg2-binary==2.9.11
+sqlparse==0.5.5
+tzdata==2025.3
+whitenoise==6.12.0
+```
 
-3. Invitación
+---
 
-El administrador invita usuarios al grupo mediante correo.
+## ⚙️ Funcionalidades principales
 
-4. Gestión de tareas
+* 🔐 Registro e inicio de sesión de usuarios
+* 👥 Creación y gestión de grupos
+* ✉️ Invitación de usuarios por correo electrónico
+* 🛡️ Sistema de roles (Administrador / Miembro)
+* 📝 CRUD completo de tareas
+* 📌 Asignación de tareas a usuarios
+* 🗂️ Organización por categorías
+* 💬 Comentarios en tareas
+* 📊 Registro de actividad (auditoría básica)
+
+---
+
+## 🔐 Control de acceso
+
+El sistema implementa control de acceso basado en:
+
+### 📍 Pertenencia
+
+Un usuario solo puede interactuar con los grupos a los que pertenece.
+
+### 🎭 Roles
+
+**Administrador**
+
+* Invitar usuarios
+* Gestionar miembros
+* Administrar el grupo
+
+**Miembro**
+
+* Crear y gestionar tareas
+* Comentar en tareas
+
+---
+
+## 🔗 Modelo de datos (visión general)
+
+El sistema utiliza un modelo relacional con las siguientes entidades:
+
+* Usuarios
+* Grupos
+* Usuario-Grupo (relación muchos a muchos con roles)
+* Tareas
+* Categorías
+* Invitaciones
+* Comentarios
+* Registro de actividad
+
+---
+
+## 🔄 Flujos principales
+
+### 1. Registro
+
+El usuario crea una cuenta en la plataforma.
+
+### 2. Creación de grupo
+
+Un usuario crea un grupo y automáticamente se convierte en administrador.
+
+### 3. Invitación
+
+El administrador invita usuarios mediante correo electrónico.
+
+### 4. Gestión de tareas
 
 Los usuarios crean, asignan y actualizan tareas dentro del grupo.
 
-5. Colaboración
+### 5. Colaboración
 
-Los usuarios pueden comentar en tareas.
+Los usuarios interactúan mediante comentarios en tareas.
 
-🌐 Arquitectura
+---
 
-El sistema está dividido en dos repositorios:
+## 🌐 Arquitectura
 
-Backend
+El sistema está dividido en dos repositorios independientes:
 
-Encargado de:
+### 🔙 Backend
 
-lógica de negocio
-autenticación
-validaciones
-acceso a datos
-Frontend
+Responsable de:
 
-Encargado de:
+* Lógica de negocio
+* Autenticación
+* Validaciones
+* Acceso a datos
+* API REST
 
-interfaz de usuario
-consumo de la API
+### 🎨 Frontend
 
-🚀 Instalación y ejecución
-Backend
-Clonar el repositorio
-Crear entorno virtual
-Instalar dependencias
-Configurar variables de entorno
-Ejecutar migraciones
-Iniciar servidor
-Frontend
-Clonar el repositorio
-Instalar dependencias
-Configurar URL del backend
-Ejecutar servidor
+Responsable de:
 
-🛡️ Seguridad
-Autenticación basada en tokens
-Validación de permisos en backend
-Restricción de acceso por grupo
-Protección contra acceso no autorizado
-📊 Escalabilidad
+* Interfaz de usuario
+* Consumo de la API
+* Experiencia de usuario
+
+---
+
+## 🚀 Instalación y ejecución
+
+### 🔙 Backend
+
+```bash
+# Clonar repositorio
+git clone <URL_BACKEND>
+cd backend
+
+# Crear entorno virtual
+python -m venv venv
+source venv/bin/activate  # Windows: venv\Scripts\activate
+
+# Instalar dependencias
+pip install -r requirements.txt
+
+# Configurar variables de entorno
+cp .env.example .env
+
+# Ejecutar migraciones
+python manage.py migrate
+
+# Iniciar servidor
+python manage.py runserver
+```
+
+---
+
+### 🎨 Frontend
+
+```bash
+# Clonar repositorio
+git clone <URL_FRONTEND>
+cd frontend
+
+# Instalar dependencias
+npm install
+
+# Configurar variables
+cp .env.example .env
+
+# Ejecutar aplicación
+npm run dev
+```
+
+---
+
+## 🛡️ Seguridad
+
+* Autenticación basada en tokens
+* Validación de permisos en backend
+* Restricción de acceso por grupo
+* Protección contra accesos no autorizados
+
+---
+
+## 📊 Escalabilidad
 
 El sistema está preparado para:
 
-múltiples usuarios simultáneos
-múltiples grupos independientes
-separación de responsabilidades entre cliente y servidor
-🧠 Decisiones de diseño
-Uso de relación muchos a muchos con roles
-Separación frontend/backend
-Control de acceso basado en pertenencia a grupo
-Organización de tareas por categorías
-Uso de invitaciones para control de miembros
-👤 Autor
+* Múltiples usuarios concurrentes
+* Múltiples grupos independientes
+* Separación clara de responsabilidades (frontend/backend)
+* Posible despliegue en entornos cloud
 
-Diego Alejandro Rodríguez
+---
 
-📌 Estado del proyecto
+## 🧠 Decisiones de diseño
 
-En desarrollo / funcional (ajusta esto según tu avance)
+* Uso de relación muchos a muchos con roles → flexibilidad en permisos
+* Arquitectura desacoplada → escalabilidad y mantenibilidad
+* Control de acceso por pertenencia → seguridad lógica
+* Sistema de invitaciones → control de usuarios
+* Organización por categorías → mejor estructura de tareas
+
+---
+
+## 👤 Autor
+
+**Diego Alejandro Rodríguez**
+
+---
+
+## 📌 Estado del proyecto
+
+🚧 En desarrollo / Funcional (MVP)
+
+---
+
