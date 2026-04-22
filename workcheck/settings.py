@@ -28,10 +28,10 @@ SECRET_KEY = 'django-insecure--lvf#ms^ys+x#yw**!2iw-y+k*h_5y=l*j^w#d9&bc$r37+tln
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['perpetual-creation-production.up.railway.app', "localhost", "127.0.0.1"]
+ALLOWED_HOSTS = ['workcheck-production.up.railway.app', "localhost", "127.0.0.1"]
 
 CSRF_TRUSTED_ORIGINS = [
-    "https://perpetual-creation-production.up.railway.app/"
+    "https://workcheck-production.up.railway.app/"
 ]
 
 # Application definition
