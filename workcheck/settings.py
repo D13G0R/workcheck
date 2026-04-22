@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 from pathlib import Path
 import dj_database_url
 import os
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -27,7 +28,7 @@ SECRET_KEY = 'django-insecure--lvf#ms^ys+x#yw**!2iw-y+k*h_5y=l*j^w#d9&bc$r37+tln
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost','perpetual-creation-production.up.railway.app']
+ALLOWED_HOSTS = ['perpetual-creation-production.up.railway.app', "localhost", "127.0.0.1"]
 
 CSRF_TRUSTED_ORIGINS = [
     "https://perpetual-creation-production.up.railway.app/"
@@ -76,15 +77,28 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'workcheck.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
-DATABASES = {
-    'default': dj_database_url.config(
-        default=os.getenv('DATABASE_URL')
-    )
-}
+DEBUG = config("DJANGO_DEBUG", cast = bool)
+
+if DEBUG:
+    DATABASES = {
+        "default" : {
+            "ENGINE" : "django.db.backends.postgresql",
+            "NAME" : config("DB_DATABASE"),
+            "USER" : config("DB_USERNAME"),
+            "PASSWORD" : config("DB_PASSWORD"),
+            "HOST" : config("DB_HOST"),
+            "PORT" : config("DB_PORT", cast = int)
+            }
+    }
+else:
+    DATABASES = {
+        'default': dj_database_url.config(
+            default=os.getenv('DATABASE_URL')
+        )
+    }
 
 
 # Password validation
